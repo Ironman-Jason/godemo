@@ -1,15 +1,15 @@
 #Do compile in builder image.
 FROM golang:1.9.0 AS builder
-WORKDIR /go/src/github.com/jason/godemo
+WORKDIR /go/src/godemo
 COPY . .
-WORKDIR /go/src/github.com/jason/godemo/src
+WORKDIR /go/src/godemo/src
 RUN go get -d
-WORKDIR /go/src/github.com/jason/godemo/src
-RUN CGO_ENABLED=0 GOOS=linux go build -a -tags netgo -ldflags '-w'
+WORKDIR /go/src/godemo/src
+RUN CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-w'
  
 #Final image is copy from builder image.
 FROM scratch
 LABEL maintainer "ironman-jason <ai.ironman.jason@gmail.com>"
-COPY --from=builder /go/src/github.com/jason/godemo/src/main .
-EXPOSE 8080
+COPY --from=builder /go/src/godemo/src/main .
+EXPOSE 10000
 ENTRYPOINT ["/main"]
