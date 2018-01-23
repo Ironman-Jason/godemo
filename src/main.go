@@ -20,7 +20,7 @@ func pageHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/hello", helloHandler)
 	http.HandleFunc("/page", pageHandler)
-	err := http.ListenAndServe("localhost:8088", nil)
+	err := http.ListenAndServe("localhost:10000", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
