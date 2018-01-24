@@ -2,26 +2,20 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
+    "fmt"
+    "log"
+    "net/http"
 )
 
-var page = "something in html"
-
-func helloHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World!")
-}
-
-func pageHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, page)
+func h(w http.ResponseWriter, r *http.Request) {
+    http.Header.Add(w.Header(), "Content-Type", "text/json; charset=utf-8")
+    fmt.Fprintf(w, `{"message":"Hello World!"}`)
 }
 
 func main() {
-	http.HandleFunc("/hello", helloHandler)
-	http.HandleFunc("/page", pageHandler)
-	err := http.ListenAndServe("localhost:10000", nil)
-	if err != nil {
-		log.Fatal("ListenAndServe: ", err)
-	}
+    http.HandleFunc("/helloworld", h)
+    e := http.ListenAndServe("0.0.0.0:5000", nil)
+    if e != nil {
+        log.Fatal("ListenAndServe: ", e)
+    }
 }
