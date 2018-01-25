@@ -10,3 +10,4 @@ valyala/fasthttp is very much better than net/http.
 without client http session keep alive.
 valyala/fasthttp get high error rate since the port recycle speed cannot catch up with the client session check in. 
 and in this condition net/http wins with it stableness.
+Note, haven't varified with fasthttp/reuseport without session keep alive. 
